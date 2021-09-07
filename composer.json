@@ -14,7 +14,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "livewire/livewire": "^2.5",
-        "mckenziearts/laravel-notify": "^2.2"
+        "mckenziearts/laravel-notify": "^2.2",
+        "pbmedia/laravel-ffmpeg": "^7.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
