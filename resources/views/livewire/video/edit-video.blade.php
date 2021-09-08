@@ -17,9 +17,9 @@
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <label>
+
                             <textarea cols="30" rows="4" class="form-control" wire:model="video.description"></textarea>
-                        </label>
+
                     </div>
 
                     @error('video.description')
@@ -30,13 +30,13 @@
 
                     <div class="form-group">
                         <label for="visibility">Visibility</label>
-                        <label>
+
                             <select wire:model="video.visibility" class="form-control">
                                 <option value="private">private</option>
                                 <option value="public">public</option>
                                 <option value="unlisted">unlisted</option>
                             </select>
-                        </label>
+
                     </div>
 
                     @error('video.description')

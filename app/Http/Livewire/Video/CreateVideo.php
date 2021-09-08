@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Video;
 
+use App\Jobs\ConveteVideoForSreaming;
+use App\Jobs\CreateThumbnailFromVideo;
 use Livewire\WithFileUploads;
 use App\Models\Channel;
 use App\Models\Video;
@@ -42,6 +44,10 @@ class CreateVideo extends Component
             'visibility' => 'private',
             'path' => explode('/', $path)[1]
         ]);
+        // dispatch the job
+        CreateThumbnailFromVideo::dispatch($this->video);
+       // ConveteVideoForSreaming::dispatch($this->video);
+
         notify()->success('video Created successfully⚡️');
         //redirect to edit route
         return redirect()->route('video.edit', [
