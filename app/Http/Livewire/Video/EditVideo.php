@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Video;
 
 use App\Models\Channel;
 use App\Models\Video;
+use Illuminate\Support\Facades\Artisan;
 use Livewire\Component;
 
 class EditVideo extends Component
@@ -38,4 +39,10 @@ class EditVideo extends Component
 
         session()->flash('message', 'video was update ');
     }
+
+//    public function StartProcessing()
+//    {
+//        Artisan::call('queue:work');
+//
+//    }
 }

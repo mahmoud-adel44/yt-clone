@@ -13,19 +13,26 @@ class Channel extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function getRouteKeyName() 
+    public function getRouteKeyName(): string
     {
-
         return 'slug';
     }
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-
         return $this->belongsTo(User::class);
     }
 
-    public function videos()
+    public function videos(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Video::class);
+    }
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function subscribers()
+    {
+        return $this->subscriptions->count();
     }
 }

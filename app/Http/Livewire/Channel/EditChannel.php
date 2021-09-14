@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Channel;
 
+use App\Events\VideoProcessedEvent;
 use App\Models\Channel;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -75,6 +76,7 @@ class EditChannel extends Component
                 'image' => $imageImage
             ]);
         }
+
 
         session()->flash('message', 'Channel updated');
 

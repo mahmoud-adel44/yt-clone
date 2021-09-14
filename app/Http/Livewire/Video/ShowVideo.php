@@ -9,6 +9,6 @@ class ShowVideo extends Component
     public function render()
     {
         return view('livewire.video.show-video')
-            ->extends('layouts.app');;
+            ->extends('layouts.app');
     }
 }

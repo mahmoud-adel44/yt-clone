@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -45,5 +47,24 @@ class User extends Authenticatable
     {
 
         return $this->hasOne(Channel::class);
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function subscribedChannels()
+    {
+        return $this->belongsToMany(Channel::class, 'subscriptions' , 'channel_id' , 'user_id' , 'id');
+    }
+    public function isSubscribedTo(Channel $channel):bool
+    {
+        return  $this->subscriptions()->where('channel_id', $channel->id)->count();
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

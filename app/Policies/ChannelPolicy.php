@@ -12,10 +12,8 @@ class ChannelPolicy
 
 
 
-    public function update(User $user, Channel $channel)
+    public function update(User $user, Channel $channel): bool
     {
-
-
         return $user->id === $channel->user_id;
     }
 }

@@ -61,7 +61,7 @@
             <button type="submit" class="btn btn-primary">Update</button>
         </div>
 
-        @if(session()->has('message'))
+        @if( session()->has('message') )
             <div class="alert alert-success">
                 {{ session('message')}}
             </div>

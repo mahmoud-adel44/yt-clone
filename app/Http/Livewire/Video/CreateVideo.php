@@ -2,27 +2,33 @@
 
 namespace App\Http\Livewire\Video;
 
+use App\Events\VideoProcessedEvent;
 use App\Jobs\ConveteVideoForSreaming;
 use App\Jobs\CreateThumbnailFromVideo;
+use Illuminate\Support\Facades\Artisan;
 use Livewire\WithFileUploads;
 use App\Models\Channel;
 use App\Models\Video;
 use Livewire\Component;
+use Illuminate\Support\Facades\Redis;
 
 class CreateVideo extends Component
 {
 
     use WithFileUploads;
+
     public Channel $channel;
     public Video $video;
     public $videoFile;
     protected $rules = [
         'videoFile' => 'required|mimes:mkv|max:1228800'
     ];
+
     public function mount(Channel $channel)
     {
         $this->channel = $channel;
     }
+
     public function render()
     {
         return view('livewire.video.create-video')
@@ -44,11 +50,16 @@ class CreateVideo extends Component
             'visibility' => 'private',
             'path' => explode('/', $path)[1]
         ]);
-        // dispatch the job
-        CreateThumbnailFromVideo::dispatch($this->video);
-       // ConveteVideoForSreaming::dispatch($this->video);
 
-        notify()->success('video Created successfully⚡️');
+
+        // Dispatch the job
+        event(new VideoProcessedEvent($this->video));
+
+
+//        CreateThumbnailFromVideo::dispatch($this->video);
+//        ConveteVideoForSreaming::dispatch($this->video);
+
+
         //redirect to edit route
         return redirect()->route('video.edit', [
             'channel' => $this->channel,
